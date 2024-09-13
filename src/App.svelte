@@ -56,6 +56,12 @@
     showOptions = true; // Show options after loading the new question
   }
 
+  function skipToResults() {
+    question = "Results";
+    options = [];
+    allQuestionsAnswered = true; // Set to true when all questions are skipped
+  }
+
   onMount(() => {
     loadQuestion();
   });
@@ -125,6 +131,14 @@
         </ul>
       </div>
     {/if}
+    {#if !allQuestionsAnswered}
+      <button class="skip-button" on:click={skipToResults}>Skip to Results</button>
+    {/if}
+
+    <!-- Take again button -->
+    {#if allQuestionsAnswered}
+      <button class="skip-button" on:click={() => window.location.reload()}>Take Again</button>
+    {/if}
   </div>
 </main>
 
@@ -132,7 +146,7 @@
   .container {
     max-width: 800px;
     margin: 2rem auto;
-    padding: 4rem 2rem;
+    padding: 2rem;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     backdrop-filter: blur(100px);
@@ -143,9 +157,12 @@
   .question {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 5rem;
     color: #333;
     min-height: 72px;
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .options {
@@ -200,7 +217,7 @@
   }
   .levels ul li span {
     flex: 1;
-    width: 20rem;
+    min-width: 5rem;
   }
   span:first-of-type {
     text-align: right;
@@ -218,5 +235,29 @@
     right: 1rem;
     font-size: 1rem;
     color: #5555558b;
+  }
+
+  .skip-button {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition:
+      background-color 0.3s,
+      transform 0.2s,
+      box-shadow 0.3s;
+      color: rgba(0, 0, 0, 0.5);
+  }
+
+  .skip-button:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+    color: black;
+    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); */
+  }
+
+  .skip-button:active {
+    transform: scale(0.98);
   }
 </style>
