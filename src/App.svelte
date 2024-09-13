@@ -1,6 +1,7 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { questions } from "./questions.js";
+  import { fade } from "svelte/transition";
 
   let question = "";
   let options = [];
@@ -9,6 +10,7 @@
   let randomIndex = getRandomIndex();
   let userAnswers = []; // Array to track user's answers
   let allQuestionsAnswered = false; // Boolean to track if all questions are answered
+  let showOptions = true; // Boolean to control the display of options
 
   const levelsOfConsciousness = [
     "Shame",
@@ -38,18 +40,19 @@
     ];
   }
 
-  function loadQuestion() {
+  async function loadQuestion() {
     randomIndex = getRandomIndex();
     const selectedQuestion = questions[randomIndex];
     question = selectedQuestion.text;
     options = selectedQuestion.options;
+    showOptions = true; // Show options after loading the new question
   }
 
   onMount(() => {
     loadQuestion();
   });
 
-  function handleClick(optionIndex) {
+  async function handleClick(optionIndex) {
     states = [];
     const selectedOption = options[optionIndex];
     if (selectedOption.emotion) {
@@ -58,7 +61,11 @@
     }
 
     answeredIndices.push(randomIndex);
+    showOptions = false; // Hide options to trigger fade-out transition
+    await tick(); // Wait for the DOM to update
+
     if (answeredIndices.length < questions.length) {
+      await new Promise((resolve) => setTimeout(resolve, 300)); // Wait for fade-out transition to complete
       loadQuestion();
     } else {
       question = "No more questions available.";
@@ -71,13 +78,15 @@
 <main>
   <div class="container">
     <div class="question">{question}</div>
-    <div class="options">
-      {#each options as option, index}
-        <button class="option-button" on:click={() => handleClick(index)}
-          >{option.text}</button
-        >
-      {/each}
-    </div>
+    {#if showOptions}
+      <div class="options" in:fade={{ duration: 300 }} out:fade={{ duration: 300 }}>
+        {#each options as option, index (option.text)}
+          <button class="option-button" on:click={() => handleClick(index)}>
+            {option.text}
+          </button>
+        {/each}
+      </div>
+    {/if}
     {#if allQuestionsAnswered}
       <div class="levels">
         <ul>
