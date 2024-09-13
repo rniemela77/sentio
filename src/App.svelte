@@ -1,29 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-
-  const levelsOfConsciousness = [
-    "Acceptance", "Joy", "Fear", "Anger", "Grief", "Shame", "Willingness",
-    "Love", "Pride", "Peace", "Courage", "Desire", "Neutrality", "Reason",
-    "Guilt", "Apathy", "Enlightenment"
-  ];
-
-  const questions = [
-    {
-      text: "After an important meeting or conversation, do you typically...",
-      options: [
-        { text: "Move on quickly", emotion: "Acceptance" },
-        { text: "Revisit what was said", emotion: "Guilt" }
-      ]
-    },
-    {
-      text: "When someone you care about is facing a problem, do you tend to...",
-      options: [
-        { text: "Offer practical advice", emotion: "Reason" },
-        { text: "Feel strongly connected", emotion: "Grief" }
-      ]
-    },
-    // Add more questions here
-  ];
+  import { questions } from './questions.js';
 
   let question = '';
   let options = [];
