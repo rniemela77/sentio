@@ -40,11 +40,19 @@
     ];
   }
 
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
   async function loadQuestion() {
     randomIndex = getRandomIndex();
     const selectedQuestion = questions[randomIndex];
     question = selectedQuestion.text;
-    options = selectedQuestion.options;
+    options = shuffleArray([...selectedQuestion.options]); // Shuffle options
     showOptions = true; // Show options after loading the new question
   }
 
