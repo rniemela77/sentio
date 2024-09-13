@@ -7,6 +7,9 @@
   let states = [];
   let answeredIndices = [];
   let randomIndex = getRandomIndex();
+  let userAnswers = []; // Array to track user's answers
+
+  const levelsOfConsciousness = ['Shame', 'Guilt', 'Apathy', 'Grief', 'Fear', 'Desire', 'Anger', 'Pride', 'Courage', 'Neutrality', 'Willingness', 'Acceptance', 'Reason', 'Love', 'Joy', 'Peace'];
 
   function getRandomIndex() {
     let availableIndices = questions.map((_, index) => index).filter(index => !answeredIndices.includes(index));
@@ -29,6 +32,7 @@
     const selectedOption = options[optionIndex];
     if (selectedOption.emotion) {
       states.push(selectedOption.emotion);
+      userAnswers.push(selectedOption.emotion); // Track the selected emotion
     }
     answeredIndices.push(randomIndex);
     if (answeredIndices.length < questions.length) {
