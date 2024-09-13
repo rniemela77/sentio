@@ -8,6 +8,7 @@
   let answeredIndices = [];
   let randomIndex = getRandomIndex();
   let userAnswers = []; // Array to track user's answers
+  let allQuestionsAnswered = false; // Boolean to track if all questions are answered
 
   const levelsOfConsciousness = [
     "Shame",
@@ -62,6 +63,7 @@
     } else {
       question = "No more questions available.";
       options = [];
+      allQuestionsAnswered = true; // Set to true when all questions are answered
     }
   }
 </script>
@@ -81,26 +83,28 @@
         >
       {/each}
     </div>
-    <div class="levels">
-      <ul>
-        {#each levelsOfConsciousness.slice().reverse() as level}
-          <li>
-            <span
-              style="color: {userAnswers.includes(level) ? 'black' : '#888'}"
-            >
-              {level}
-            </span>
+    {#if allQuestionsAnswered}
+      <div class="levels">
+        <ul>
+          {#each levelsOfConsciousness.slice().reverse() as level}
+            <li>
+              <span
+                style="color: {userAnswers.includes(level) ? 'black' : '#888'}"
+              >
+                {level}
+              </span>
 
-            <span>
-              <!-- dot for each instance of it in userAnswers -->
-              {#each userAnswers.filter((x) => x === level) as _}
-                &#8226;
-              {/each}
-            </span>
-          </li>
-        {/each}
-      </ul>
-    </div>
+              <span>
+                <!-- dot for each instance of it in userAnswers -->
+                {#each userAnswers.filter((x) => x === level) as _}
+                  &#8226;
+                {/each}
+              </span>
+            </li>
+          {/each}
+        </ul>
+      </div>
+    {/if}
   </div>
 </main>
 
