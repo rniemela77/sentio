@@ -70,11 +70,6 @@
 
 <main>
   <div class="container">
-    <div class="states">
-      {#each states as state}
-        <div class="state-item">{state}</div>
-      {/each}
-    </div>
     <div class="question">{question}</div>
     <div class="options">
       {#each options as option, index}
@@ -112,7 +107,7 @@
   .container {
     max-width: 800px;
     margin: 2rem auto;
-    padding: 1rem;
+    padding: 4rem 2rem;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     backdrop-filter: blur(100px);
@@ -123,7 +118,7 @@
   .question {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 1.5rem;
+    margin-bottom: 5rem;
     color: #333;
   }
 
