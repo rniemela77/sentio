@@ -60,7 +60,7 @@
       userAnswers = [...userAnswers, selectedOption.emotion]; // Reassign to trigger reactivity
     }
 
-    answeredIndices.push(randomIndex);
+    answeredIndices = [...answeredIndices, randomIndex]; // Reassign to trigger reactivity
     showOptions = false; // Hide options to trigger fade-out transition
     await tick(); // Wait for the DOM to update
 
@@ -77,9 +77,17 @@
 
 <main>
   <div class="container">
+    <div class="number">
+      <!-- 01/50 -->
+      {answeredIndices.length + 1}/{questions.length}
+    </div>
     <div class="question">{question}</div>
     {#if showOptions}
-      <div class="options" in:fade={{ duration: 300 }} out:fade={{ duration: 300 }}>
+      <div
+        class="options"
+        in:fade={{ duration: 300 }}
+        out:fade={{ duration: 300 }}
+      >
         {#each options as option, index (option.text)}
           <button class="option-button" on:click={() => handleClick(index)}>
             {option.text}
@@ -202,5 +210,12 @@
     color: black;
     font-size: 2rem;
     line-height: 0.2;
+  }
+  .number {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+    color: #5555558b;
   }
 </style>
