@@ -5,12 +5,23 @@
   let question = "";
   let options = [];
   let states = [];
-  let randomIndex = Math.floor(Math.random() * questions.length);
+  let answeredIndices = [];
+  let randomIndex = getRandomIndex();
 
-  onMount(() => {
+  function getRandomIndex() {
+    let availableIndices = questions.map((_, index) => index).filter(index => !answeredIndices.includes(index));
+    return availableIndices[Math.floor(Math.random() * availableIndices.length)];
+  }
+
+  function loadQuestion() {
+    randomIndex = getRandomIndex();
     const selectedQuestion = questions[randomIndex];
     question = selectedQuestion.text;
     options = selectedQuestion.options;
+  }
+
+  onMount(() => {
+    loadQuestion();
   });
 
   function handleClick(optionIndex) {
@@ -18,6 +29,13 @@
     const selectedOption = options[optionIndex];
     if (selectedOption.emotion) {
       states.push(selectedOption.emotion);
+    }
+    answeredIndices.push(randomIndex);
+    if (answeredIndices.length < questions.length) {
+      loadQuestion();
+    } else {
+      question = "No more questions available.";
+      options = [];
     }
   }
 </script>
