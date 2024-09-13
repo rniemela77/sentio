@@ -9,11 +9,32 @@
   let randomIndex = getRandomIndex();
   let userAnswers = []; // Array to track user's answers
 
-  const levelsOfConsciousness = ['Shame', 'Guilt', 'Apathy', 'Grief', 'Fear', 'Desire', 'Anger', 'Pride', 'Courage', 'Neutrality', 'Willingness', 'Acceptance', 'Reason', 'Love', 'Joy', 'Peace'];
+  const levelsOfConsciousness = [
+    "Shame",
+    "Guilt",
+    "Apathy",
+    "Grief",
+    "Fear",
+    "Desire",
+    "Anger",
+    "Pride",
+    "Courage",
+    "Neutrality",
+    "Willingness",
+    "Acceptance",
+    "Reason",
+    "Love",
+    "Joy",
+    "Peace",
+  ];
 
   function getRandomIndex() {
-    let availableIndices = questions.map((_, index) => index).filter(index => !answeredIndices.includes(index));
-    return availableIndices[Math.floor(Math.random() * availableIndices.length)];
+    let availableIndices = questions
+      .map((_, index) => index)
+      .filter((index) => !answeredIndices.includes(index));
+    return availableIndices[
+      Math.floor(Math.random() * availableIndices.length)
+    ];
   }
 
   function loadQuestion() {
@@ -32,8 +53,9 @@
     const selectedOption = options[optionIndex];
     if (selectedOption.emotion) {
       states.push(selectedOption.emotion);
-      userAnswers.push(selectedOption.emotion); // Track the selected emotion
+      userAnswers = [...userAnswers, selectedOption.emotion]; // Reassign to trigger reactivity
     }
+
     answeredIndices.push(randomIndex);
     if (answeredIndices.length < questions.length) {
       loadQuestion();
@@ -59,6 +81,26 @@
         >
       {/each}
     </div>
+    <div class="levels">
+      <ul>
+        {#each levelsOfConsciousness.slice().reverse() as level}
+          <li>
+            <span
+              style="color: {userAnswers.includes(level) ? 'black' : '#888'}"
+            >
+              {level}
+            </span>
+
+            <span>
+              <!-- dot for each instance of it in userAnswers -->
+              {#each userAnswers.filter((x) => x === level) as _}
+                &#8226;
+              {/each}
+            </span>
+          </li>
+        {/each}
+      </ul>
+    </div>
   </div>
 </main>
 
@@ -78,7 +120,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
-    color: #333; 
+    color: #333;
   }
 
   .options {
@@ -124,5 +166,33 @@
     font-size: 1rem;
     color: #333;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .levels ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* flex-wrap: wrap; */
+  }
+  .levels ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+  .levels ul li span {
+    flex: 1;
+    width: 20rem;
+  }
+  span:first-of-type {
+    text-align: right;
+    color: #555;
+  }
+  span:last-of-type {
+    text-align: left;
+    color: black;
+    font-size: 2rem;
+    line-height: 0.2;
   }
 </style>
