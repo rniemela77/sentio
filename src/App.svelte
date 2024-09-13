@@ -45,8 +45,9 @@
     max-width: 800px;
     margin: 2rem auto;
     padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent overlay */
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
+    backdrop-filter: blur(100px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
   }
@@ -55,7 +56,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
-    color: #333; /* High contrast for readability */
+    color: #333; 
   }
 
   .options {
@@ -65,7 +66,7 @@
   }
 
   .option-button {
-    background-color: #6c757d; /* Neutral color */
+    background-color: #6c757d;
     color: white;
     border: none;
     border-radius: 6px;
@@ -76,12 +77,12 @@
       background-color 0.3s,
       transform 0.2s,
       box-shadow 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .option-button:hover {
     background-color: #5a6268;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   .option-button:active {
@@ -100,6 +101,6 @@
     border-radius: 6px;
     font-size: 1rem;
     color: #333;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle depth */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   }
 </style>

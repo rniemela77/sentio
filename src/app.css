@@ -6,7 +6,9 @@
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f4f8;
+
+  background: linear-gradient(to bottom right, #e0f2f154, #b9fbc045, #ffffff);
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
