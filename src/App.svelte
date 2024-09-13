@@ -137,12 +137,20 @@
     font-weight: bold;
     margin-bottom: 5rem;
     color: #333;
+    min-height: 72px;
   }
 
   .options {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+  }
+
+  /* column on mobile */
+  @media (max-width: 600px) {
+    .options {
+      grid-template-columns: 1fr;
+    }
   }
 
   .option-button {
@@ -153,6 +161,7 @@
     padding: 1rem;
     font-size: 1.1rem;
     cursor: pointer;
+    min-height: 72px;
     transition:
       background-color 0.3s,
       transform 0.2s,
@@ -169,28 +178,12 @@
     transform: scale(0.98);
   }
 
-  .states {
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 1.5rem;
-  }
-
-  .state-item {
-    background-color: #e9ecef;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    font-size: 1rem;
-    color: #333;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  }
-
   .levels ul {
     list-style-type: none;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* flex-wrap: wrap; */
   }
   .levels ul li {
     display: flex;
