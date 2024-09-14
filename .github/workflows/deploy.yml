@@ -1,31 +1,38 @@
 name: Deploy to GitHub Pages
 
+# Run the workflow whenever there is a push to the main branch
 on:
   push:
     branches:
-      - main  # Change this if your default branch is not 'main'
+      - main  # or 'master', depending on your default branch
 
+# Define the jobs
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 1: Checkout the repository code
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup Node.js
+    # Step 2: Set up Node.js environment
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '16'  # Ensure to use the version your project requires
 
+    # Step 3: Install dependencies
     - name: Install dependencies
       run: npm install
 
-    - name: Build project
+    # Step 4: Build the project
+    - name: Build the project
       run: npm run build
 
+    # Step 5: Deploy to GitHub Pages
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+        publish_dir: ./dist  # Ensure this is the correct output directory of your build
