@@ -140,6 +140,13 @@
       <button class="skip-button" on:click={() => window.location.reload()}>Take Again</button>
     {/if}
   </div>
+
+  <!-- footer -->
+  <footer>
+    <p>
+      Made by Robert Niemela | Email: <a href="mailto:rvniemela@hotmail.com">rvniemela@hotmail.com</a> | GitHub: <a href="https://github.com/rniemela77" target="_blank">https://github.com/rniemela77</a>
+    </p>
+  </footer>
 </main>
 
 <style>
@@ -259,5 +266,19 @@
 
   .skip-button:active {
     transform: scale(0.98);
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 0.7rem;
+    padding: 0.2rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(100px);
+    text-align: center;
+    opacity:0.5;
   }
 </style>
