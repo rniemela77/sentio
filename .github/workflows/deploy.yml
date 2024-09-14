@@ -24,12 +24,11 @@ jobs:
     - name: Build the project
       run: npm run build
 
-    - name: Remove cache directory
-      run: rm -rf ./.cache  # Optional, to avoid potential cache issues
-
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
-        personal_token: ${{ secrets.ACTIONS_DEPLOY_KEY }}  # Your secret token
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist  # The directory where your build files are
-        allow_empty_commit: true  # To avoid empty commit issues
+
+    - name: Remove cache directory
+      run: rm -rf ./.cache  # Optional, to avoid potential cache issues
